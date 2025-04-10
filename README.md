@@ -69,3 +69,20 @@ cp .env.sample .env
 ```bash
 npm run dev
 ```
+
+## Programación dirigida por eventos
+
+En este proyecto se utiliza la librería `eventemitter3` para manejar eventos de forma eficiente. Esta librería es una versión optimizada y ligera del EventEmitter nativo de Node.js, diseñada para ser más rápida y con un tamaño reducido.
+
+Existen otras opciones como `mitt`, `nanoevents` o `eventemitter2`, pero `eventemitter3` es la más popular y ampliamente utilizada en proyectos grandes.
+
+|                       | `events` (nativo de Node.js)       | `eventemitter3` (npm)               |
+| :-------------------- | :--------------------------------- | :---------------------------------- |
+| **Origen**            | Built-in, viene con Node.js        | Librería externa en npm             |
+| **Tamaño**            | Más pesado (por legacy)            | Ultra-ligero (~1 KB)                |
+| **Velocidad**         | Suficiente para la mayoría         | Muy optimizado y rápido             |
+| **API**               | Tradicional (`on`, `emit`, `once`) | Igual, pero más moderna             |
+| **Compatibilidad**    | Solo Node.js                       | Node.js y navegadores (browser)     |
+| **Extensibilidad**    | Limitada                           | Mejor pensada para heredar/extender |
+| **Eventos wildcard**  | No                                 | No nativo, pero puedes extenderlo   |
+| **Uso en producción** | Perfecto para proyectos Node       | Muy usado en librerías grandes      |
