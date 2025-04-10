@@ -1,5 +1,5 @@
-import * as userDAO from "../dao/userDAO.js";
-import * as postDAO from "../dao/postDAO.js";
+import * as userDAO from "../dao/user.dao.js";
+import * as postDAO from "../dao/post.dao.js";
 
 export const resolvers = {
   Query: {

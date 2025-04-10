@@ -1,10 +1,9 @@
 import { Router } from "express";
-import postDAO from "../../../dao/postDAO.js";
+import * as controller from "../../controllers/posts/post.controller.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.json(postDAO.all());
-});
+router.get("/", controller.all);
+router.get("/:id", controller.get);
 
 export default router;

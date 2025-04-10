@@ -1,10 +1,9 @@
 import { Router } from "express";
-import userDAO from "../../../dao/userDAO.js";
+import { all, get } from "../../controllers/users/user.controller.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.json(userDAO.all());
-});
+router.get("/", all);
+router.get("/:id", get);
 
 export default router;
