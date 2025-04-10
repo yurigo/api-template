@@ -2,7 +2,7 @@ export const typedefs = `
     type Query { 
         hello: String
         bye: Int
-        otro: String
+        other: String
         users: [User]
         user(id: ID!): User
         posts: [Post]
