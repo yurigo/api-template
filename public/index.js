@@ -36,6 +36,22 @@ const hasCollisionX = () =>
 const hasCollisionY = () =>
   position.y + dvdHeight >= canvas.clientHeight || position.y < 0;
 
+const offset = 10; // Offset for corner collision detection
+
+const hasCornerCollision = () => {
+  const hittingRight = position.x + dvdWidth >= canvas.clientWidth - offset;
+  const hittingLeft = position.x <= 0 + offset;
+  const hittingBottom = position.y + dvdHeight >= canvas.clientHeight - offset;
+  const hittingTop = position.y <= 0 + offset;
+
+  return (
+    (hittingRight && hittingBottom) ||
+    (hittingRight && hittingTop) ||
+    (hittingLeft && hittingBottom) ||
+    (hittingLeft && hittingTop)
+  );
+};
+
 const draw = () => {
   dvd.style.left = position.x + "px";
   dvd.style.top = position.y + "px";
@@ -54,6 +70,33 @@ function animate() {
     changeColor();
   }
 
+  if (hasCornerCollision()) {
+    confetti({
+      particleCount: 100,
+      spread: 130,
+
+      origin: {
+        x: position.x / (canvas.clientWidth - dvdWidth),
+        y: position.y / (canvas.clientHeight - dvdHeight),
+      },
+
+      angle: (() => {
+        const hittingRight =
+          position.x + dvdWidth >= canvas.clientWidth - offset;
+        const hittingLeft = position.x <= 0 + offset;
+        const hittingBottom =
+          position.y + dvdHeight >= canvas.clientHeight - offset;
+        const hittingTop = position.y <= 0 + offset;
+
+        if (hittingLeft && hittingTop) return -45;
+        if (hittingLeft && hittingBottom) return 45;
+        if (hittingRight && hittingTop) return -135;
+        if (hittingRight && hittingBottom) return 135;
+
+        return 0; // Default angle if no corner collision
+      })(),
+    });
+  }
   draw();
 
   window.requestAnimationFrame(animate);
